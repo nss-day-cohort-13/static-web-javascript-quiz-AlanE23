@@ -10,34 +10,54 @@ var planet // planet will be equal to the number of spaces needed
 
 var numP // numP will be equal to the number of symbols needed
 
-var buttonPress = document.getElementById("buttonID");
+var cave // empty variable
 
-function submit () {
-  var prince = document.getElementById("bSymbol").value;
+var tree = ""; // the tree
 
-  var willisT = document.getElementById("bHeight").value;
+var buttonPress = document.getElementById("buttonID").addEventListener("click", middle);
 
-  console.log("symbol", prince);
-  console.log("height", willisT);
+var princeField = document.getElementById("bSymbol");
+
+var willisTField = document.getElementById("bHeight");
+
+princeField.addEventListener("keypress", enterKey);
+
+willisTField.addEventListener("keypress", enterKey);
+
+function enterKey (e) {
+  var pressKey = e.keyCode;
+  if (pressKey==13) {
+    middle();
+  }
 }
 
+cave = {};
 
-
-for (var i = 1; i <= willisT; i++) {
-
-  // assigning a value to planet, height of tree - i
-  planet = willisT - i;
-
-  // assigning a value to numP, proportional to i, always odd for symmetry
-  numP = (2 * i) - 1;
-
-  console.log("",space.repeat(planet) + prince.repeat(numP) + "\n");
+function middle () {
+  cave.prince = princeField.value;
+  cave.willisT = willisTField.value;
+  submitB(cave);
 }
 
+function submitB (peyton) {
 
-console.log("End Program");
+  if (peyton.prince === "" || peyton.willisT === "") {
+    alert("Please enter a valid input");
+    return;
+  }
 
+  for (var i = 1; i <= peyton.willisT; i++) {
 
-// empty movement() variable that becomes a function
+    // assigning a value to planet, height of tree - i
+    planet = peyton.willisT - i;
 
-// "pass" arguement inside a function
+    // assigning a value to numP, proportional to i, always odd for symmetry
+    numP = (2 * i) - 1;
+
+    tree += space.repeat(planet) + peyton.prince.repeat(numP) + "\n";
+  }
+  console.log(tree);
+
+  console.log("End Program");
+}
+
